@@ -22,9 +22,10 @@ vim.keymap.set("x", "<leader>p", [["_dP]])
 -- delete to void register
 vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
 
--- copy to system clipboard
+-- copy/paste to system clipboard
 vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
+vim.keymap.set({"n", "v"}, "<leader>p", [["+p]])
 
 -- Ctrl-f to /
 vim.keymap.set("n", "<C-f>", "/")
