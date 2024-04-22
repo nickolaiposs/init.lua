@@ -20,9 +20,9 @@ require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
 
 lsp.ensure_installed({
     -- Replace these with whatever servers you want to install
-    'tsserver',
-    'eslint',
-    'rust_analyzer'
+    -- 'tsserver',
+    -- 'eslint',
+    -- 'rust_analyzer'
 })
 
 lsp.setup()
@@ -31,7 +31,15 @@ local cmp = require("cmp")
 local cmp_action = require("lsp-zero").cmp_action()
 
 cmp.setup({
+    preselect = 'item',
+    completion = {
+        completeopt = 'menu,menuone,noinsert'
+    },
     mapping = {
-        ["<CR>"] = cmp.mapping.confirm({select = false})
+        ["<CR>"] = cmp.mapping.confirm({select = false}),
+        ["<Tab>"] = cmp.mapping.confirm({select = true})
+    },
+    sources = {
+        {name = 'conjure'}
     }
 })

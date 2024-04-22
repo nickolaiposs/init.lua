@@ -96,8 +96,43 @@ local plugins = {
     {
         'windwp/nvim-autopairs',
         event = "InsertEnter",
-        opts = {} -- this is equalent to setup({}) function
-    }
+        opts = {
+            disable_filetype = { "rkt", "racket", "scheme" }
+        } -- this is equalent to setup({}) function
+    },
+    {
+        "Olical/conjure",
+        ft = { "clojure", "rkt", "racket", "scheme", "scm" }, -- etc
+        -- [Optional] cmp-conjure for cmp
+        dependencies = {
+            {
+                "PaterJason/cmp-conjure",
+                config = function()
+                    local cmp = require("cmp")
+                    local config = cmp.get_config()
+                    table.insert(config.sources, {
+                        name = "buffer",
+                        option = {
+                            sources = {
+                                { name = "conjure" },
+                            },
+                        },
+                    })
+                    cmp.setup(config)
+                end,
+            },
+        },
+        config = function(_, opts)
+            require("conjure.main").main()
+            require("conjure.mapping")["on-filetype"]()
+        end,
+        init = function()
+               -- Set configuration options here
+            vim.g["conjure#debug"] = true
+        end,
+    },
+    { "gpanders/nvim-parinfer" }
 }
+
 
 require("lazy").setup(plugins)
